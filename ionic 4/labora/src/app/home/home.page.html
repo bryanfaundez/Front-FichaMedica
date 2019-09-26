@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-button slot="end" (click)="presentActionSheet()" ></ion-button>
+    <ion-title text-center>
+      Laboratorio
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="ion-padding">
+    Fichas medicas
+    <p> Kinesiologia <a target="_blank" rel="noopener" ></a> consulta api </p>
+  </div>
+<ion-list>
+
+  <ion-item>
+      <ion-label position="floating">Rut paciente</ion-label>
+      <ion-input [(ngModel)]="rut.id_ficha" placeholder="Ingrese rut del paciente"></ion-input>
+  </ion-item>
+
+
+  <ion-button  (click)="guardar()" >Consultar</ion-button>
+   <p> <strong> Codigo: </strong> {{text}} </p>
+  <p text-center routerLink="/agregar" >Agregar </p>
+  
+</ion-list>
+
+</ion-content>
