@@ -70,6 +70,7 @@ export interface interconsulta{
 }
 
 export class interconsulta{
+    id: number
     nombre_medico : string
     nombre_paciente :string
     rut_paciente:number

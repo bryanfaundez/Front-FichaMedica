@@ -4,28 +4,32 @@
     <ion-title text-center>
       Laboratorio
     </ion-title>
-
+    <p> <strong> Codigo: </strong> {{text}} </p>
+    <ion-button  color="success" (click)="guardar()" >Ver mis fichas medicas</ion-button>
+    <ion-button  color="success" (click)="interconsulta()" >Ver interconsultas</ion-button>
+    
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
 
   <div class="ion-padding">
     Fichas medicas
-    <p> Kinesiologia <a target="_blank" rel="noopener" ></a> consulta api </p>
+    <p> Bienvenido a su laboratorio virtual <a target="_blank" rel="noopener" ></a>  de registros meditos </p>
+    
   </div>
 <ion-list>
-
+<!--<p>
   <ion-item>
       <ion-label position="floating">Rut paciente</ion-label>
       <ion-input [(ngModel)]="rut.id_ficha" placeholder="Ingrese rut del paciente"></ion-input>
   </ion-item>
+  </p>-->
+  <p text-center routerLink="/agregar" >Agregar consulta </p>
 
-
-  <ion-button  (click)="guardar()" >Consultar</ion-button>
-   <p> <strong> Codigo: </strong> {{text}} </p>
-  <p text-center routerLink="/agregar" >Agregar </p>
-  
 </ion-list>
+
+
 
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{interconsulta }from "../models/ficha.models"
 import { RestService } from '../servicios/rest.service';
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.page.html',
@@ -9,16 +10,16 @@ import { RestService } from '../servicios/rest.service';
 export class AgregarPage implements OnInit {
 
     interconsulta:interconsulta = new interconsulta();
-  constructor( private interconsultaServicio : RestService) { }
+  constructor( private interconsultaServicio : RestService,  private route:Router ) { }
 
   ngOnInit() {
   }
 enviar(){
   
-  console.log(this.interconsulta)
   this.interconsultaServicio.agregarInterconsulta(this.interconsulta).subscribe(()=>{
-    console.log("Se guardo")
-    alert('Se ha guardado correctamente')
+
+    alert('Interconsulta agregada')
+    this.route.navigateByUrl("/lista-interconsulta"); 
   },
   error=>{
     console.log(error)
@@ -26,4 +27,6 @@ enviar(){
   })
 
 }
+
+
 }

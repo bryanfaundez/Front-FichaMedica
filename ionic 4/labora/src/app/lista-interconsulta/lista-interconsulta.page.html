@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ListaInterconsulta</ion-title>
+  </ion-toolbar>
+  <ion-button expand="block"(click)="nueva()">Agregar nueva interconsulta</ion-button>
+</ion-header>
+
+<ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+   <ion-list>
+
+
+        <ion-item *ngFor="let interconsulta of interconsulta"  >
+          <ion-label>
+              <ion-grid>
+            <p> <strong> nombre_medico: </strong> {{interconsulta.nombre_medico}} </p>
+            <p> <strong> nombre_paciente: </strong> {{interconsulta.nombre_paciente}} </p>
+            <p> <strong> rut_paciente: </strong> {{interconsulta.rut_paciente}} </p>
+            <p> <strong> genero: </strong> {{interconsulta.genero}} </p>
+            <p> <strong> peso_paciente: </strong> {{interconsulta.peso_paciente}} </p>
+            <p > <strong> altura_paciente: </strong > {{interconsulta.altura_paciente}} </p>
+            <p> <strong> presion_cardiaca: </strong> {{interconsulta.presion_cardiaca}} </p>
+            <p> <strong> observaciones_medicas: </strong> {{interconsulta.observaciones_medicas}} </p>
+            <p> <strong> fecha_atencion: </strong> {{interconsulta.fecha_atencion}} </p>
+          <br>
+          <ion-button  (click)="EditarInterconsulta(interconsulta)" >Editar</ion-button>
+          <ion-button color="danger" (click)="EliminarInterconsulta(interconsulta.id)" >borrar</ion-button>
+
+        </ion-grid>
+          </ion-label>
+        
+          </ion-item> 
+       
+       
+          
+        </ion-list>
+
+</ion-content>

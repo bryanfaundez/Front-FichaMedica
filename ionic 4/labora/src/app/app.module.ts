@@ -22,6 +22,8 @@ import{AngularFireModule}from "@angular/fire";
 import{AngularFireAuthModule} from "@angular/fire/auth"
 import{AngularFirestore}from "@angular/fire/firestore"
 
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore'
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +39,8 @@ import{AngularFirestore}from "@angular/fire/firestore"
     MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFirestoreModule
   ],
 
   providers: [
@@ -46,7 +49,8 @@ import{AngularFirestore}from "@angular/fire/firestore"
     RestService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy,
      },
-     AngularFirestore
+     AngularFirestore,
+     { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })
