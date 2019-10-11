@@ -1,0 +1,7 @@
+{
+  "name": "mylab",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
