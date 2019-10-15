@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+    <ion-title>Fichas medicas</ion-title>
+    <p><strong>Bienvenido </strong>{{nombre}} {{apellido}}</p>
+    
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding >
+    <ion-router-outlet [swipeGesture]="true"></ion-router-outlet>
+    <ion-list>
+    <ion-item *ngFor="let user of psicologia"  >
+    <ion-label>
+      <ion-grid>
+      <p> <strong> rut: </strong> {{user.rut}} </p>
+      <p > <strong> sf_fechaa_ing:</strong > {{user.sf_fechaa_ing}} </p>
+      <p >  <strong >sf_fechaa_egr: </strong> {{user.sf_fechaa_egr}} </p>
+      <p> <strong> sf_funcion_ing: </strong> {{user.sf_funcion_ing}} </p>
+      <p> <strong> sf_rol_ing: </strong> {{user.sf_rol_ing}} </p>
+      <p> <strong> sf_dolor_ing: </strong> {{user.sf_dolor_ing}} </p>
+      <p> <strong> sf_salid_egr: </strong> {{user.sf_salid_egr}} </p>
+      <p> <strong> sf_vital_ing: </strong> {{user.sf_vital_ing}} </p>
+      <p> <strong> sf_vital_egr: </strong> {{user.sf_vital_egr}} </p>
+      <p> <strong> sf_funcionsoc_egr: </strong> {{user.sf_funcionsoc_egr}} </p>
+      <p> <strong> sf_rolemo_ing: </strong> {{user.sf_rolemo_ing}} </p>
+      <p> <strong> sf_rolemo_egr: </strong> {{user.sf_rolemo_egr}} </p>
+      <p> <strong> sf_saludmen_ing: </strong> {{user.sf_saludmen_ing}} </p>
+      
+      <p> <strong> sf_salidmen_egr: </strong> {{user.sf_salidmen_egr}} </p>
+      <p> <strong> had_ansie_ing: </strong> {{user.had_ansie_ing}} </p>
+      <p> <strong> had_ansie_egr: </strong> {{user.had_ansie_egr}} </p>
+      <p> <strong> had_depre_ing: </strong> {{user.had_depre_ing}} </p>
+      <p> <strong> had_depre_egr: </strong> {{user.had_depre_egr}} </p>
+      <p> <strong> had_suba_ing: </strong> {{user.had_suba_ing}} </p>
+      <p> <strong> had_suba_egr: </strong> {{user.had_suba_egr}} </p>
+      <p> <strong> had_subd_ing: </strong> {{user.had_subd_ing}} </p>
+      <p> <strong> had_subd_egr: </strong> {{user.had_subd_egr}} </p>
+    
+    </ion-grid>
+    </ion-label>
+  
+    </ion-item> 
+
+ 
+    
+
+  </ion-list>
+
+
+</ion-content>

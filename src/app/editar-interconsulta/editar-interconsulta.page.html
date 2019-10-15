@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>editarInterconsulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+
+    <ion-item *ngFor="let interconsulta of interconsulta"  >
+      <ion-label>
+
+          <p> <strong> nombre_medico: </strong> {{interconsulta.id}} </p>
+          <ion-item>  
+              <ion-label position="floating">Nombre Medico</ion-label>
+              <ion-input type="text"  [(ngModel)]="interconsulta.nombre_medico" > </ion-input>
+            </ion-item>
+          
+          
+            <ion-item>  
+                <ion-label position="floating"> Nombre paciente</ion-label>
+                <ion-input type="text"[(ngModel)]="interconsulta.nombre_paciente" > </ion-input>
+              </ion-item>
+          
+          
+            <ion-item>  
+                  <ion-label position="floating"> Rut paciente (sin puntos ni guion) </ion-label>
+                  <ion-input type="text" [(ngModel)]="interconsulta.rut_paciente" > </ion-input>
+                </ion-item>
+      
+            <ion-item>
+                    <ion-label>Genero</ion-label>
+                    <ion-select [(ngModel)]="interconsulta.genero"  placeholder="Select One">
+                      <ion-select-option value="femenino" >Femenino</ion-select-option>
+                      <ion-select-option value="masculino">Masculino</ion-select-option>
+                      <ion-select-option value="nobinary">No binario</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+       
+          <ion-item>  
+            <ion-label position="floating"> Peso paciente</ion-label>
+            <ion-input type="text" [(ngModel)]="interconsulta.peso_paciente" > </ion-input>
+          </ion-item>
+          
+          <ion-item>
+              <ion-label position="floating"> Altura</ion-label>
+              <ion-input type="text" [(ngModel)]="interconsulta.altura_paciente" > </ion-input>
+            </ion-item>
+      
+          <ion-item>
+                <ion-label position="floating"> Presion cardiaca </ion-label>
+                <ion-input type="text" [(ngModel)]="interconsulta.presion_cardiaca" > </ion-input>
+              </ion-item>
+      
+          <ion-item>
+                  <ion-label position="floating"> Observaciones medicas</ion-label>
+                  <ion-textarea type="text" [(ngModel)]="interconsulta.observaciones_medicas"> </ion-textarea>
+                </ion-item>
+      
+          <ion-item>
+                    <ion-label position="floating"> Fecha atencion</ion-label>
+                    <ion-datetime [(ngModel)]="interconsulta.fecha_atencion " display-format="YYYY,DD,MM" ></ion-datetime>
+                  </ion-item>
+      </ion-label>
+
+      </ion-item> 
+   
+        <br>
+    <ion-button expand="block"(click)="enviar(interconsulta)">Actulizar</ion-button>
+      
+    </ion-list>
+
+
+
+    
+</ion-content>
