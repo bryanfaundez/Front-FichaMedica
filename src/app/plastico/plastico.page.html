@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+      <ion-title>Plastico</ion-title>
+    </ion-toolbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+              
+          <ion-list *ngFor="let p of plastico"  >
+             <ion-card padding color="primary">
+              <p> <strong> Volmen: </strong> {{p.volumen}} </p>
+              <p> <strong>  </strong>   </p>
+              <p><strong> fecha: </strong> {{p.created_at | date: 'dd/MM/yyyy'}} </p>
+            
+            </ion-card>
+            
+          </ion-list>  
+         
+  
+  
+  </ion-content>
+  

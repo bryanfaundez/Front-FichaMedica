@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import{ AuthGuard} from "../app/guards/auth.guard"
-import{ nologinGuard} from "../app/guards/nologin.guard"
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate:[AuthGuard] },
-  { path: 'pagina2', loadChildren: './pagina2/pagina2.module#Pagina2PageModule', canActivate:[AuthGuard] },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule',canActivate:[nologinGuard] },
-  { path: 'registro', loadChildren: './registro/registro.module#RegistroPageModule',canActivate:[nologinGuard] },
-  { path: 'agregar', loadChildren: './agregar/agregar.module#AgregarPageModule', canActivate:[AuthGuard] },
-  { path: 'lista-interconsulta', loadChildren: './lista-interconsulta/lista-interconsulta.module#ListaInterconsultaPageModule', canActivate:[AuthGuard] },
-  { path: 'editar-interconsulta', loadChildren: './editar-interconsulta/editar-interconsulta.module#EditarInterconsultaPageModule' },
-  { path: 'psicologia', loadChildren: './psicologia/psicologia.module#PsicologiaPageModule' },
-  { path: 'file', loadChildren: './file/file.module#FilePageModule' },
-  { path: 'storage', loadChildren: './storage/storage.module#StoragePageModule' },
-
-
+  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  { path: 'metales', loadChildren: './metales/metales.module#MetalesPageModule' },
+  { path: 'graficos', loadChildren: './graficos/graficos.module#GraficosPageModule' },
+  { path: 'vidrio', loadChildren: './vidrio/vidrio.module#VidrioPageModule' },
+  { path: 'plastico', loadChildren: './plastico/plastico.module#PlasticoPageModule' },
+  { path: 'agregar-metales', loadChildren: './agregar-metales/agregar-metales.module#AgregarMetalesPageModule' },
+  { path: 'editar-metales', loadChildren: './editar-metales/editar-metales.module#EditarMetalesPageModule' },
+  { path: 'grafico-reciclaje', loadChildren: './grafico-reciclaje/grafico-reciclaje.module#GraficoReciclajePageModule' },
 ];
 
 @NgModule({
@@ -25,4 +20,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
- 

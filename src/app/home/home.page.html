@@ -1,42 +1,26 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar color="primary">
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
           </ion-buttons>
-    
-    <ion-button
-     slot="end" color="success" (click)="presentActionSheet()" >
-     <ion-icon slot="start" name="finger-print"></ion-icon>
-    </ion-button>
-    
-    <ion-title text-center>
-      Laboratorio
+          
+    <ion-title>
+        Reciclaje 
     </ion-title>
-
-    
   </ion-toolbar>
-     <p> <strong> Codigo: </strong> {{text}} </p>
 </ion-header>
 
 <ion-content>
-    <ion-router-outlet [swipeGesture]="true"></ion-router-outlet>
   <div class="ion-padding">
-    Fichas medicas
-    <p> Bienvenido a su laboratorio virtual <a target="_blank" rel="noopener" ></a>  de registros medicos </p>
-    
+    Bienvenido a la plataforma de reciclaje
+    <ion-card>
+        <ion-card-content padding>
+     Usted podra ver los kilos de metales reciclados por dia, tambien podras agregar un nuevo deposito 
+    de metal, incluso podra editarlo y borrarlo si es necesario.
+    Desplegara un grafico para ver la cantidad total diaria de metales reciclados 
+    Adicionalmente podra ver los otros materiales reciclados y un grafico de cuanto dinero recauda por material
+    </ion-card-content>
+  </ion-card>
   </div>
-<ion-list>
-<!--<p>
-  <ion-item>
-      <ion-label position="floating">Rut paciente</ion-label>
-      <ion-input [(ngModel)]="rut.id_ficha" placeholder="Ingrese rut del paciente"></ion-input>
-  </ion-item>
- 
-  </p>-->
   
- <p text-center routerLink="/storage">File </p>
-</ion-list>
-
-
-
 </ion-content>

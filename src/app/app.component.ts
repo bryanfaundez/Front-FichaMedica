@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -13,27 +12,24 @@ import { MenuController } from '@ionic/angular';
 })
 export class AppComponent {
   navigate : any;
+  navigate2 : any;
 
   constructor(
-    private menu: MenuController,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    router:Router
+    private router:Router 
   ) {
     this.sideMenu();
     this.initializeApp();
-    
   }
 
   initializeApp() {
-    
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
-
   sideMenu(){
     this.navigate =
     [
@@ -43,29 +39,69 @@ export class AppComponent {
         icon  : "home"
       },
       {
-        title : "FichaKine",
-        url   : "/pagina2",
-        icon  : "walk"
+        title : "Metales",
+        children:[
+          {
+           title:"Lista-Editar-Borrar metales ",
+            url   : "/metales",
+           icon  : "build"
+          },
+          {
+            title : "Grafico de metales",
+            url   : "/graficos",
+            icon  : "analytics"
+          },
+          {
+            title : "Agregar metales",
+            url   : "/agregar-metales",
+            icon  : "add-circle"
+          },
+        ]
+        
       },
       {
-        title : "Interconsulta",
-        url   : "/lista-interconsulta",
-        icon  : "medkit"
+        title : "Plastico",
+        url   : "/plastico",
+        icon  : "wine"
       },
       {
-        title : "Psicologia",
-        url   : "/psicologia",
-        icon  : "happy"
+        title : "Vidrio",
+        url   : "/vidrio",
+        icon  : "cube"
       },
       {
-        title : "File",
-        url   : "/storage",
-        icon  : "happy"
-      },
+        title : "Grafico dinero recuadado",
+        url   : "/grafico-reciclaje",
+        icon  : "analytics"
+      }
+   
     ]
-  }
-  openEnd() {
-    console.log("cerraando")
-    this.menu.close()
+
+
+    this.navigate2 =
+    [
+      {
+        title : "Home",
+        url   : "/home",
+        icon  : "home"
+      },
+      {
+        title : "Plastico",
+        url   : "/plastico",
+        icon  : "wine"
+      },
+      {
+        title : "Metales",
+        url   : "/metales",
+        icon  : "build"
+      },
+      {
+        title : "Grafico dinero recuadado",
+        url   : "/grafico-reciclaje",
+        icon  : "analytics"
+      },
+      
+   
+    ]
   }
 }

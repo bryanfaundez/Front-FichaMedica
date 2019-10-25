@@ -1,21 +1,11 @@
-import { Component } from '@angular/core';
-import { RestService } from '../servicios/rest.service';
-import{rut} from '../models/ficha.models'
-import{kine} from '../models/ficha.models'
-import{codigo} from '../models/ficha.models'
-import { Storage } from '@ionic/storage';
-import { Route, Router } from '@angular/router';
-import{AuthService}from "../servicios/auth.service"
-import { auth } from 'firebase';
-import { ActionSheetController } from '@ionic/angular';
-import * as firebase from 'firebase/app';
-import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
-import {  take , map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs';
-import { AlertController } from '@ionic/angular';
-import{firebaseConfig} from "../../environments/environment";
+import { Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import{ RestMetalService} from '../services/rest-metal.service'
+import{Storage} from '@ionic/storage'
+import{ RestPlasticoService} from '../services/rest-plastico.service'
+import { plastics } from '../modelos';
+
 
 @Component({
   selector: 'app-home',
@@ -23,125 +13,176 @@ import{firebaseConfig} from "../../environments/environment";
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  rut:rut =   new rut();
-  public usuarios: Object
-  kine:kine[];
-  user: Object
-  public text = "";
-  public text1 = "No_Permitido";
-  students: any;
+  public  metales = new Array();
 
-  constructor(public alertController: AlertController,private restServices:RestService,  private route:Router , private storage: Storage , public authservice: AuthService,public actionSheetController: ActionSheetController,private db : AngularFirestore  )   {}
+  public  lunes : Number;
+  public  martes : Number;
+  public  miercoles : Number;
+  public  jueves : Number;
+  public  viernes : Number;
+  public  sabado : Number;
+  public  domingo : Number;
 
-  ngOnInit() {   
+  public  n_metales: number
+  public  n_lunes =new Array(); 
+  public  n_martes =new Array(); 
+  public  n_miercoles =new Array(); 
+  public  n_jueves =new Array(); 
+  public  n_viernes=new Array(); 
+  public  n_sabado =new Array(); 
+  public  n_domingo =new Array(); 
 
-    
-    var user = firebase.auth().currentUser;
-    var name, email, uid, rut,persona;
-   if (user != null) {
-        name = user.displayName;
-        email = user.email;
-        uid = user.uid;
-        console.log(email+" "+" "+uid)
-      } 
-      this.storage.set("uid",uid)
-
-//-----------------------------------------------------------
-this.db.doc('users/'+uid).snapshotChanges().subscribe(data=>{
-
-  persona= data.payload.get("rut");
-        this.storage.set("rut",persona)
-  })
-  }
-codigo(){
-  this.text='' 
- var charset = "abcdefghijklmnopqrstuvwxyz0123456789#%*.,;";
- for (var i = 0; i < 10; i++)
-   this.text += charset.charAt(Math.floor(Math.random() * charset.length));
-  this.presentAlert()
-  var user = firebase.auth().currentUser;
-  var name, email, uid, rut,apellido,nombre;
-
- if (user != null) {
-      name = user.displayName;
-      email = user.email;
-      uid = user.uid;
-      console.log(email+" "+" "+uid)
-    } 
-
-    this.db.doc('users/'+uid).snapshotChanges().subscribe(data=>{
-      rut = data.payload.get("rut");
-      apellido = data.payload.get("apellido")
-      nombre = data.payload.get("name")
-       console.log(nombre+" "+apellido+" "+" "+rut)
-       
-       this.db.collection('codigo').doc(rut).set({
-        uid: uid,
-        name:nombre,
-        apellido:apellido,
-        rut:rut,
-        codigo:this.text
-      })
-      console.log(this.text)
-      setTimeout(() => {
-        this.text=this.text1
-        console.log('Async operation has ended');
-        
-        this.db.collection('codigo').doc(rut).set({
-          uid: uid,
-          name:nombre,
-          apellido:apellido,
-          rut:rut,
-          codigo:this.text
-        })
-
-        console.log(this.text)
-      }, 180000);
-    })
-
-  return this.text ;
+  public day = new Array
   
+  public largo : Number;
+  public i : number;
+  public  plastico = new Array();
+  private  volumen_tota : number
+  public j : number
+  reducer = (accumulator, currentValue) => accumulator + currentValue;
+
  
-}
-onlogout(){
-  this.authservice.logout();
-}
-
-async presentActionSheet() {
-  const actionSheet = await this.actionSheetController.create({
-    header: 'Opciones',
-    buttons: [{
-      text: 'Desconectarse',
-      role: 'destructive',
-      icon: 'close',
-      handler: () => {
-        this.onlogout()
-      }
-    }, {
-      text: 'Generar token',
-      icon: 'share',
-      handler: () => {
-        this.codigo()
-      },
+  constructor(private restMetales:RestMetalService,private route:Router,
+    private storage:Storage,private restPlastic:RestPlasticoService) { }
+  ngOnInit() {
+    this.pla();
     
-    }]
-  });
-  await actionSheet.present();
-}
-async presentAlert() {
-  const alert = await this.alertController.create({
-    header: 'Entregue este codigo a su medico',
-    subHeader: this.text,
-    message: 'Caducara al usar o al pasar 10 min',
-    buttons: ['OK']
-  });
-
-  await alert.present();
-}
-
-}
-
-
-
-
+    
   
+  }
+  pla(){
+
+    this.restPlastic.verPlastico().subscribe((plast)=>{
+      this.plastico=plast
+      var acum = 0;
+      for ( this.j = 0; this.j<this.plastico.length; this.j++){
+        if( (this.plastico[this.j]) != null){
+          acum=acum +(this.plastico[this.j].volumen)
+        }                   
+      }
+     this.volumen_tota=acum
+    //  console.log(this.volumen_tota )
+        
+       })
+       this.metales_total();
+  }
+ 
+  metales_total(){
+      
+    this.restMetales.verMetalesa().subscribe((metal)=>{
+      this.metales=metal
+      this.largo = Object.keys(metal).length; 
+      for(var i=0;i<this.largo;i++){
+                   if(this.metales[i].dia=="lunes"){
+                         
+                      //    this.lunes.push(this.metales[i])
+                          //this.n_lunes= this.n_lunes+ this.metales[i].kilos
+                          this.n_lunes.push(this.metales[i].kilos)
+                         // console.log(this.lunes)
+                      }
+                      else if(this.metales[i].dia=="martes"){
+                       // this.martes.push(this.metales[i])
+                        this.n_martes.push(this.metales[i].kilos)
+                       // this.n_martes= this.n_martes+this.metales[i].kilos
+                    }
+                    else if(this.metales[i].dia=="miercoles"){
+                    //  this.miercoles.push(this.metales[i])
+                      this.n_miercoles.push(this.metales[i].kilos)
+                     // this.n_miercoles= this.n_miercoles+this.metales[i].kilos
+                  }
+                  else if(this.metales[i].dia=="jueves"){
+                   // this.jueves.push(this.metales[i])
+                    this.n_jueves.push(this.metales[i].kilos)
+                   // this.n_jueves= this.n_jueves+this.metales[i].kilos
+                }
+                else if(this.metales[i].dia=="viernes"){
+                //  this.viernes.push(this.metales[i])
+                  this.n_viernes.push(this.metales[i].kilos)
+                 // this.n_viernes= this.n_viernes+this.metales[i].kilos
+              }
+              else if(this.metales[i].dia=="sabado"){
+               // this.sabado.push(this.metales[i])
+                this.n_sabado.push(this.metales[i].kilos)
+               // this.n_sabado= this.n_sabado+this.metales[i].kilos
+            }
+            else if(this.metales[i].dia=="domingo"){
+             // this.domingo.push(this.metales[i])
+              this.n_domingo.push(this.metales[i].kilos)
+              //this.n_domingo=  this.n_domingo+this.metales[i].kilos
+            }
+            
+      }
+      
+  
+      var acum = 0;
+      for (var j = 0; j<=this.n_lunes.length; j++){
+        if( (this.n_lunes[j]) != null){
+            acum=acum +(this.n_lunes[j])
+        }
+      }
+      this.day.push(acum)
+  
+  
+        var acum = 0;
+        for (var j = 0; j<=this.n_martes.length; j++){
+          if( (this.n_martes[j]) != null){
+              acum=acum +(this.n_martes[j])
+          }
+        }
+        this.day.push(acum)
+        var acum = 0;
+        for (var j = 0; j<=this.n_miercoles.length; j++){
+          if( (this.n_miercoles[j]) != null){
+              acum=acum +(this.n_miercoles[j])
+          }
+        }
+        this.day.push(acum)
+        var acum = 0;
+        for (var j = 0; j<=this.n_jueves.length; j++){
+          if( (this.n_jueves[j]) != null){
+              acum=acum +(this.n_jueves[j])
+          }
+        }
+        this.day.push(acum)
+        var acum = 0;
+        for (var j = 0; j<=this.n_viernes.length; j++){
+          if( (this.n_viernes[j]) != null){
+              acum=acum +(this.n_viernes[j])
+          }
+        }
+        this.day.push(acum)
+  
+        var acum = 0;
+        for (var j = 0; j<=this.n_sabado.length; j++){
+          if( (this.n_sabado[j]) != null){
+              acum=acum +(this.n_sabado[j])
+          }
+        }
+        this.day.push(acum)
+   
+        var acum = 0;
+        for (var j = 0; j<=this.n_domingo.length; j++){
+          if( (this.n_domingo[j]) != null){
+              acum=acum +(this.n_domingo[j])
+          }
+        }
+        
+        this.day.push(acum)
+        var acum = 0;
+        for (var j = 0; j<=this.day.length; j++){
+          if( (this.day[j]) != null){
+              acum=acum +(this.day[j])
+          }
+        }
+        this.storage.set("volumen",this.volumen_tota)
+        this.storage.set("total_metal",acum)
+        this.storage.set("dias",this.day)
+  
+  
+  
+  })
+  
+  
+  }
+
+}

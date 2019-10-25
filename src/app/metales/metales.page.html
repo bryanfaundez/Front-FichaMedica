@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+    <ion-title>metales</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      
+        <ion-list *ngFor="let metales of metales"  >
+            
+            <p> <strong> kilos: </strong> {{metales.kilos}} </p>
+            <p> <strong>  </strong>   </p>
+            <p><strong> fecha: </strong> {{metales.fecha_ingreso | date: 'dd/MM/yyyy'}} </p>
+            
+            <p> <strong> dia de la semana: </strong> {{metales.dia}} </p>
+
+            <ion-button  (click)="EditarMetales(metales)" >Editar</ion-button>
+            <ion-button color="danger" (click)="EliminarInterconsulta(metales.id)" >borrar</ion-button>
+         
+           
+        </ion-list> 
+       
+
+
+</ion-content>
